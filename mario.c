@@ -8,27 +8,30 @@ int main(void)
     {
         n = get_int("Height: ");
     }
+    // range in 1 to 8
     while (n < 1 || n > 8);
+    // how many times to run
     for (int i = 0; i < n; i++)
     {
+        // right spaces
         for (int s = n - i; s > 1; s--)
         {
             printf(" ");
         }
+        //right pyramids
         for (int h = 0; h < i + 1; h++)
         {
             printf("#");
         }
-        //for (int ss = 1; ss < i ; n - ss)
-        //{
+        // gap
         printf("  ");
-        //}
+        //left pyramids
         for (int hh = 0; hh < i + 1; hh++)
         {
 
             printf("#");
         }       
-    printf("\n");
+        printf("\n");
     }
   
 }
