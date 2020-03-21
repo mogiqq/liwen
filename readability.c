@@ -20,12 +20,12 @@ int main(void)
     float words = count_words(t);
     float sentences = count_sentences(t);
     
-    float l = (letters / words)*100;
-    float s = (sentences / words)*100;
+    float l = (letters / words) * 100;
+    float s = (sentences / words) * 100;
     
     float index = 0.0588 * l - 0.296 * s - 15.8;
     
-   // printf("%f, %f, %f\n",l, s, index);
+    //printf("%f, %f, %f\n",l, s, index);
     
     if (index < 1)
     {
@@ -74,11 +74,11 @@ int count_sentences(string s)
     int sum = 0;
     for (int i = 0, n = strlen(s); i < n; i++)
     {
-        if ((s[i] == '?' ) || (s[i] == '.') || (s[i] == '!'))
+        if ((s[i] == '?') || (s[i] == '.') || (s[i] == '!'))
         {
             sum += 1;
         }
     }
-   return sum;
+    return sum;
     
 }
