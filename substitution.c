@@ -5,8 +5,6 @@
 
 int main(int k, string array[])
 {
-    int a = strlen(array[1]);
-    
     // check if input data is single command line argument
     if (k != 2)
     {
@@ -15,6 +13,7 @@ int main(int k, string array[])
     }
     
     // check if number of characters is less than 26
+    int a = strlen(array[1]);
     if (a != 26)
     {
         printf("Key must contain 26 characters\n");
@@ -22,6 +21,7 @@ int main(int k, string array[])
     }
     
     // check if characters contain digit(s)
+    
     for (int i = 0; i < a; i++)
     {
         if (isdigit(array[1][i]))
