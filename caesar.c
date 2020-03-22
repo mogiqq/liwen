@@ -38,12 +38,12 @@ int main(int k, string array[])
         
         if (isupper(plaintext[i]))
         {
-            int c = (((((plaintext[i] + key)-65) % 26)+65));
+            int c = (((((plaintext[i] + key) - 65) % 26) + 65));
             printf("%c", c);
         }
         else if (islower(plaintext[i]))
         {
-            int c = (((((plaintext[i] + key)-97) % 26)+97));
+            int c = (((((plaintext[i] + key) - 97) % 26) + 97));
             printf("%c", c);
         }
         else
