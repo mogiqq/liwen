@@ -13,7 +13,7 @@ int main(int k, string array[])
     }
     
     // check if number of characters is less than 26
-    int a = strlen(array[1]);
+    int a = strlen(array[1]); //segmentation fault caused if it was moved before k != 2
     if (a != 26)
     {
         printf("Key must contain 26 characters\n");
