@@ -7,9 +7,9 @@ int main(int k, string array[])
 {
     int a = strlen(array[1]);
     // check if input data is single command line argument
-    if (k != 2)
+    if (k < 2)
     {
-        printf("Usage: ./substitution key\n");
+        printf("Usage:./substitution key\n");
         return 1;
     }
     
@@ -48,17 +48,17 @@ int main(int k, string array[])
     {
         if (isupper(plaintext[i]))
         {
-            int c = (plaintext[i] - 65);
-            printf("%c", array[1][c]);
+            int cu = (plaintext[i] - 65);
+            printf("%c", toupper(array[1][cu]));
         }
         else if (islower(plaintext[i]))
         {
-            int c = (plaintext[i] - 97);
-            printf("%c", array[1][c]);
+            int cl = (plaintext[i] - 97);
+            printf("%c", tolower(array[1][cl]));
         }
         else
         {
-            printf("%c", array[1][i]);
+            printf("%c", plaintext[i]);
         }
     }
     printf("\n");
