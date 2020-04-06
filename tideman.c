@@ -142,8 +142,8 @@ void add_pairs(void)
             }
             else if (preferences[i][j] < preferences[j][i])
             {
-                pairs[pair_count].winner = i;
-                pairs[pair_count].loser = j;
+                pairs[pair_count].winner = j;
+                pairs[pair_count].loser = i;
                 pair_count ++;
             }
         }
@@ -176,9 +176,9 @@ void lock_pairs(void)
 {
     // TODO
     // if rank count == candidate count refers to every candidate has been arrowed
-    int rank_count = 0; 
+    int rank_count = 0;
     // x = candidate index; if rank[x] == true refers to the candidate arrowed to others
-    bool rank; 
+    bool rank;
 
     for (int i = 0; i < pair_count; i++)
     {
@@ -188,13 +188,13 @@ void lock_pairs(void)
             {
                 locked[pairs[i].winner][pairs[j].loser] = true;
                 rank_count ++;
-                
+
                 if (rank_count == candidate_count)
                 {
                     locked[pairs[i].winner][pairs[j].loser] = false;
                 }
             }
-            
+
         }
     }
     return;
@@ -212,7 +212,7 @@ void print_winner(void)
             if (locked[j][i] == true)
             {
                 source ++;
-                
+
                 if (source == candidate_count)
                 {
                     printf("%s", candidates[j]);
@@ -221,6 +221,6 @@ void print_winner(void)
             }
         }
     }
-    
+
 }
 
