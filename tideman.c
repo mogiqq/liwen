@@ -195,14 +195,9 @@ void lock_pairs(void)
                 rank_count--;
             }
         }
-        else if (winner[pairs[i].winner] == true)
+        else
         {
-            if (rank_count == candidate_count)
-            {
-                locked[pairs[i].winner][pairs[i].loser] = false;
-                winner[pairs[i].winner] = false;
-                rank_count--;
-            }
+            return true;
         }
     }
     return;
