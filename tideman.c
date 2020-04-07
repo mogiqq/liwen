@@ -177,7 +177,7 @@ void lock_pairs(void)
     // TODO
     // if rank count == candidate count refers to every candidate has been arrowed
     int rank_count = 0;
-    bool winner[MAX] = false;
+    bool winner[MAX];
 
     for (int i = 0; i < pair_count; i++)
     {
