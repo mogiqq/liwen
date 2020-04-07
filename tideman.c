@@ -195,11 +195,8 @@ void lock_pairs(void)
                 rank_count--;
             }
         }
-        else
-        {
-            return true;
-        }
     }
+    return;
 }
 
 // Print the winner of the election
