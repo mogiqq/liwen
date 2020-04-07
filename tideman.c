@@ -10,6 +10,7 @@ int preferences[MAX][MAX];
 
 // locked[i][j] means i is locked in over j
 bool locked[MAX][MAX];
+bool lock = true;
 
 // Each pair has a winner, loser
 typedef struct
@@ -171,34 +172,65 @@ void sort_pairs(void)
     return;
 }
 
+void cheklock(int j)
+{
+    int rank_count = 0;
+    bool rank[MAX];
+    
+    if (j == 0)
+    {
+        return;
+    }
+    
+    for (int i = 0; i < j; i++)
+    {
+        rank[i] = false;
+    }
+    
+    cheklock(j-1);
+    
+    for (int i = 0; i < j; i++)
+    {
+        for (int k = 0; k < j; k++)
+        {
+            if (locked[i][k] == true)
+            {
+                if (rank[i] == false)
+                {
+                    rank[i] = true;
+                    rank_count++;
+                }
+            }
+        }
+    }
+    
+    if (rank_count == j)
+    {
+        lock = false;
+    }
+    
+}
+
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
     // TODO
     // if rank count == candidate count refers to every candidate has been arrowed
     int rank_count = 0;
-    bool winner[MAX];
+    bool rank[MAX];
 
     for (int i = 0; i < pair_count; i++)
     {
-        if (winner[pairs[i].winner] == true)
+        locked[pairs[i].winner][pairs[i].loser] = true;
+        
+        cheklock(candidate_count);
+        
+        if (!lock)
         {
-            locked[pairs[i].winner][pairs[i].loser] = true;
+            locked[pairs[i].winner][pairs[i].loser] = false;
         }
-        else if (winner[pairs[i].winner] == false)
-        {
-            winner[pairs[i].winner] = true;
-            rank_count++;
-                
-            if (rank_count == candidate_count)
-            {
-                locked[pairs[i].winner][pairs[i].loser] = false;
-                winner[pairs[i].winner] = false;
-                rank_count--;
-            }
-        }
+        lock = true;
     }
-    return;
 }
 
 // Print the winner of the election
