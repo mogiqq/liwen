@@ -185,7 +185,7 @@ void lock_pairs(void)
         {
             locked[pairs[i].winner][pairs[i].loser] = true;
  
-            if (winner[pairs[i].winner] == false)
+            if (winner[pairs[i].winner] != true)
             {
                 winner[pairs[i].winner] = true;
                 rank_count++;
