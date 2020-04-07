@@ -182,12 +182,12 @@ void lock_pairs(void)
     {
         if (locked[pairs[i].winner][pairs[i].loser] == false)
         {
-            locked[pairs[i].winner][pairs[i].loser] = true;
+            return true;
             rank_count ++;
 
-            if (rank_count == candidate_count-1)
+            if (rank_count == candidate_count)
             {
-                locked[pairs[i].winner][pairs[i].loser] = false;
+                return false;
                 break;
             }
         }
