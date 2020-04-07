@@ -181,22 +181,20 @@ void lock_pairs(void)
 
     for (int i = 0; i < pair_count; i++)
     {
-        if (rank_count == candidate_count)
+        if (locked[pairs[i].winner][pairs[i].loser] == false)
         {
-            locked[pairs[i].winner][pairs[i].loser] = false;
-            break;
-        }
-        else if (rank_count < candidate_count)
-        {
-            if (locked[pairs[i].winner][pairs[i].loser] == false)
+            locked[pairs[i].winner][pairs[i].loser] = true;
+            
+            if(winner[pairs[i].winner] == false)
             {
-                locked[pairs[i].winner][pairs[i].loser] = true;
-                if(winner[pairs[i].winner] == false)
+                winner[pairs[i].winner] = true;
+                rank_count++;
+                
+                if (rank_count == candidate_count)
                 {
-                    winner[pairs[i].winner] = true;
-                    rank_count++;
+                    locked[pairs[i].winner][pairs[i].loser] = false;
                 }
-            {
+            }
         }
     }
     return;
