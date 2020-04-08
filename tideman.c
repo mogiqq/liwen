@@ -189,7 +189,7 @@ void cheklock(int j)
     }
 
     // checks all the submatrixes up to a single square using recursion
-    cheklock(j-1);
+    cheklock(j - 1);
 
     for (int i = 0; i < j; i++)
     {
