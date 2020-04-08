@@ -172,23 +172,25 @@ void sort_pairs(void)
     return;
 }
 
+// use recursion to check lock
 void cheklock(int j)
 {
     int rank_count = 0;
     bool rank[MAX];
-    
+
     if (j == 0)
     {
         return;
     }
-    
+
     for (int i = 0; i < j; i++)
     {
         rank[i] = false;
     }
-    
+
+    // checks all the submatrixes up to a single square using recursion
     cheklock(j-1);
-    
+
     for (int i = 0; i < j; i++)
     {
         for (int k = 0; k < j; k++)
@@ -203,12 +205,12 @@ void cheklock(int j)
             }
         }
     }
-    
+
     if (rank_count == j)
     {
         lock = false;
     }
-    
+
 }
 
 // Lock pairs into the candidate graph in order, without creating cycles
@@ -216,15 +218,13 @@ void lock_pairs(void)
 {
     // TODO
     // if rank count == candidate count refers to every candidate has been arrowed
-    int rank_count = 0;
-    bool rank[MAX];
 
     for (int i = 0; i < pair_count; i++)
     {
         locked[pairs[i].winner][pairs[i].loser] = true;
-        
+
         cheklock(candidate_count);
-        
+
         if (!lock)
         {
             locked[pairs[i].winner][pairs[i].loser] = false;
@@ -237,21 +237,22 @@ void lock_pairs(void)
 void print_winner(void)
 {
     // TODO
-    int source = 0;
+    bool winner;
     for (int i = 0; i < candidate_count; i++)
     {
         for (int j = 0; j < candidate_count; j++)
         {
+            //if i is loser in any locked pair, they are not the source
             if (locked[j][i] == true)
             {
-                source ++;
-
-                if (source == candidate_count)
-                {
-                    printf("%s", candidates[j]);
-                    break;
-                }
+                winner = false;
             }
+        }
+
+        if (winner)
+        {
+            printf("%s", candidates[i]);
+            break;
         }
     }
 
