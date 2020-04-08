@@ -239,13 +239,14 @@ void print_winner(void)
     // TODO
     int source;
     bool winner;
+    
     for (int i = 0; i < candidate_count; i++)
     {
+        winner = true;
         for (int j = 0; j < candidate_count; j++)
         {
-            winner = true;
             //if i is loser in any locked pair, they are not the source
-            if (locked[j][i] == true)
+            if (locked[j][i])
             {
                 winner = false;
             }
@@ -257,6 +258,6 @@ void print_winner(void)
         }
     }
     
-    printf("%s\n", candidates[i]);
+    printf("%s\n", candidates[source]);
 }
 
