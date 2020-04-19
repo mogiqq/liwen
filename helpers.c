@@ -71,24 +71,21 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    int blurRed = 0;
-    int blurBlue = 0;
-    int blurGreen = 0;
-    float counter = 0.00;
+    int blurRed;
+    int blurBlue;
+    int blurGreen;
+    float counter;
     RGBTRIPLE temp[height][width];
-    
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            temp[i][j] = image[i][j];
-        }
-    }
 
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
         {
+            blurRed = 0;
+            blurBlue = 0;
+            blurGreen = 0;
+            counter = 0.0;
+            
             for (int n = -1; n < 2; n++)
             {
                 if (i + n < 0 || i + n > height - 1)
@@ -103,18 +100,26 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                         continue;
                     }
 
-                    blurRed += temp[i + n][j + m].rgbtRed;
-                    blurBlue += temp[i + n][j + m].rgbtBlue;
-                    blurGreen += temp[i + n][j + m].rgbtGreen;
+                    blurRed += image[i + n][j + m].rgbtRed;
+                    blurBlue += image[i + n][j + m].rgbtBlue;
+                    blurGreen += image[i + n][j + m].rgbtGreen;
                     counter++;
                 }
 
             }
+
+            temp[i][j].rgbtRed = round(blurRed / counter);
+            temp[i][j].rgbtBlue = round(blurBlue / counter);
+            temp[i][j].rgbtGreen = round(blurGreen / counter);
             
-            image[i][j].rgbtRed = round(blurRed / counter);
-            image[i][j].rgbtBlue = round(blurBlue / counter);
-            image[i][j].rgbtGreen = round(blurGreen / counter);
-            
+        }
+    }
+    
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            image[i][j] = temp[i][j];
         }
     }
 
