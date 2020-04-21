@@ -96,7 +96,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     int gy[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
     RGBTRIPLE temp[height][width];
 
-    for  (int i = 0; i < height; i++)
+    for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
         {
