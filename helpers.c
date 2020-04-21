@@ -111,17 +111,13 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             {
                 if (i + x - 1 < 0 || i + x - 1 > height - 1)
                 {
-                    image[i+x-1][j].rgbtRed = 0;
-                    image[i+x-1][j].rgbtBlue = 0;
-                    image[i+x-1][j].rgbtGreen = 0;
+                    continue;
                 }
                 for (int y = 0; y < 3; y++)
                 {
                     if (j + y - 1 < 0 || j + y - 1 > width - 1)
                     {
-                        image[i][j+y-1].rgbtRed = 0;
-                        image[i][j+y-1].rgbtBlue = 0;
-                        image[i][j+y-1].rgbtGreen = 0;
+                        continue;
                     }
 
                     gxRed += gx[x][y] * image[i+x-1][j+y-1].rgbtRed;
@@ -132,24 +128,29 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                     gyGreen += gy[x][y] * image[i+x-1][j+y-1].rgbtGreen;
                 }
             }
-            temp[i][j].rgbtRed = round((float)sqrt((gxRed * gxRed) + (gyRed * gyRed)));
-            temp[i][j].rgbtBlue = round((float)sqrt((gxBlue * gxBlue) + (gyBlue * gyBlue)));
-            temp[i][j].rgbtGreen = round((float)sqrt((gxGreen * gxGreen) + (gyGreen * gyGreen)));
+            
+            int r = round((float)sqrt((gxRed * gxRed) + (gyRed * gyRed)));
+            int b = round((float)sqrt((gxBlue * gxBlue) + (gyBlue * gyBlue)));
+            int g = round((float)sqrt((gxBlue * gxBlue) + (gyBlue * gyBlue)));
 
-            if (temp[i][j].rgbtRed > 255)
+            if (r > 255)
             {
-                temp[i][j].rgbtRed = 255;
+                r = 255;
             }
 
-            if (temp[i][j].rgbtBlue > 255)
+            if (b > 255)
             {
-                temp[i][j].rgbtBlue = 255;
+                b = 255;
             }
 
-            if (temp[i][j].rgbtGreen > 255)
+            if (g > 255)
             {
-                temp[i][j].rgbtGreen = 255;
+                g = 255;
             }
+                        
+            temp[i][j].rgbtRed = r;
+            temp[i][j].rgbtBlue = b;
+            temp[i][j].rgbtGreen = g;
         }
     }
 
