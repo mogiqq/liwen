@@ -111,25 +111,25 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             {
                 if (i + x - 1 < 0 || i + x - 1 > height - 1)
                 {
-                    image[i][j].rgbtRed = 0;
-                    image[i][j].rgbtBlue = 0;
-                    image[i][j].rgbtGreen = 0;
+                    image[i+x-1][j].rgbtRed = 0;
+                    image[i+x-1][j].rgbtBlue = 0;
+                    image[i+x-1][j].rgbtGreen = 0;
                 }
                 for (int y = 0; y < 3; y++)
                 {
-                    if (j + y - 1 < 0 || j + y - 1> width - 1)
+                    if (j + y - 1 < 0 || j + y - 1 > width - 1)
                     {
-                        image[i][j].rgbtRed = 0;
-                        image[i][j].rgbtBlue = 0;
-                        image[i][j].rgbtGreen = 0;
+                        image[i][j+y-1].rgbtRed = 0;
+                        image[i][j+y-1].rgbtBlue = 0;
+                        image[i][j+y-1].rgbtGreen = 0;
                     }
 
-                    gxRed += gx[x][y] * image[x][y].rgbtRed;
-                    gxBlue += gx[x][y] * image[x][y].rgbtBlue;
-                    gxGreen += gx[x][y] * image[x][y].rgbtGreen;
-                    gyRed += gy[x][y] * image[x][y].rgbtRed;
-                    gyBlue += gy[x][y] * image[x][y].rgbtBlue;
-                    gyGreen += gy[x][y] * image[x][y].rgbtGreen;
+                    gxRed += gx[x][y] * image[i+x-1][j+y-1].rgbtRed;
+                    gxBlue += gx[x][y] * image[i+x-1][j+y-1].rgbtBlue;
+                    gxGreen += gx[x][y] * image[i+x-1][j+y-1].rgbtGreen;
+                    gyRed += gy[x][y] * image[i+x-1][j+y-1].rgbtRed;
+                    gyBlue += gy[x][y] * image[i+x-1][j+y-1].rgbtBlue;
+                    gyGreen += gy[x][y] * image[i+x-1][j+y-1].rgbtGreen;
                 }
             }
             temp[i][j].rgbtRed = round((float)sqrt((gxRed * gxRed) + (gyRed * gyRed)));
