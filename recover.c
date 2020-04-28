@@ -32,14 +32,8 @@ int main(int argc, char *argv[])
 
     while (fread(buffer, sizeof(char), 512, file))
     {
-
-        if (feof(file))
-        {
-            break;
-        }
-
         // check if bytes are 0xff 0xd8 0xff 0xe0-0xef
-        else if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
+        if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
             //create string of ###.jpg for the first image
             if (imagecount == 0)
@@ -50,7 +44,7 @@ int main(int argc, char *argv[])
                 fwrite(buffer, 512, 1, img);
             }
             
-            else if (imagecount != 0)
+            else
             {
                 // close previouse file if another jpg has been found
                 fclose(img);
