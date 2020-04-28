@@ -45,19 +45,21 @@ int main(int argc, char *argv[])
             if (imagecount == 0)
             {
                 sprintf(filename, "%03i.jpg", imagecount);
+                open = true;
                 img = fopen(filename, "w");
                 fwrite(buffer, 512, 1, img);
-                open = true;
-                
             }
             
-            // close previouse file if another jpg has been found
-            fclose(img);
-            sprintf(filename, "%03i.jpg", imagecount);
-            img = fopen(filename, "w");
-            fwrite(buffer, 512, 1, img);
-            open = true;
-            imagecount++;
+            else if (imagecount != 0)
+            {
+                // close previouse file if another jpg has been found
+                fclose(img);
+                imagecount++;
+                sprintf(filename, "%03i.jpg", imagecount);
+                open = true;
+                img = fopen(filename, "w");
+                fwrite(buffer, 512, 1, img);
+            }
         }
                     
         // continue writing if the file is opening
