@@ -67,5 +67,5 @@ int main(int argc, char *argv[])
     }
     fclose(img);
     fclose(file);
-    return 0;
+
 }
