@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
     int imagecount = 0; //count number of jpg file
     char filename[8]; // every JPG file requires 7 chars + null terminator = 8
     FILE *img;
+    bool open;
 
     while (fread(buffer, sizeof(char), 512, file))
     {
@@ -46,7 +47,8 @@ int main(int argc, char *argv[])
                 sprintf(filename, "%03i.jpg", imagecount);
                 img = fopen(filename, "w");
                 fwrite(buffer, 512, 1, img);
-                imagecount++
+                open = true;
+                
             }
             
             // close previouse file if another jpg has been found
@@ -54,11 +56,12 @@ int main(int argc, char *argv[])
             sprintf(filename, "%03i.jpg", imagecount);
             img = fopen(filename, "w");
             fwrite(buffer, 512, 1, img);
+            open = true;
             imagecount++;
         }
                     
         // continue writing if the file is opening
-        else if (imagecount != 0)
+        else if (open == true)
         {
             fwrite(buffer, 512, 1, img);
         }
