@@ -46,15 +46,15 @@ int main(int argc, char *argv[])
                 sprintf(filename, "%03i.jpg", imagecount);
                 img = fopen(filename, "w");
                 fwrite(buffer, 512, 1, img);
-                imagecount++;
+                imagecount++
             }
             
             // close previouse file if another jpg has been found
             fclose(img);
-            imagecount++;
             sprintf(filename, "%03i.jpg", imagecount);
             img = fopen(filename, "w");
             fwrite(buffer, 512, 1, img);
+            imagecount++;
         }
                     
         // continue writing if the file is opening
