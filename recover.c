@@ -40,23 +40,21 @@ int main(int argc, char *argv[])
             if (imagecount == 0)
             {
                 sprintf(filename, "%03i.jpg", imagecount);
-                open = true;
-                imagecount++;
                 img = fopen(filename, "w");
                 fwrite(buffer, 512, 1, img);
-                
+                open = true;
+                imagecount++;
             }
             
             else
             {
                 // close previouse file if another jpg has been found
                 fclose(img);
-                open = true;
-                imagecount++;
                 sprintf(filename, "%03i.jpg", imagecount);
                 img = fopen(filename, "w");
                 fwrite(buffer, 512, 1, img);
-                
+                open = true;
+                imagecount++;
             }
         }
                     
