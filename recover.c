@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BLOCK_SIZE 512
-
 int main(int argc, char *argv[])
 {
     // remind the user of correct usage if your program is not executed with exactly one command-line argument
@@ -31,7 +29,7 @@ int main(int argc, char *argv[])
     char filename[8]; // every JPG file requires 7 chars + null terminator = 8
     FILE *img;
 
-    while (fread(buffer, BLOCK_SIZE, 1, file))
+    while (fread(buffer, sizeof(char), 512, file))
     {
 
         if (feof(file))
@@ -42,24 +40,29 @@ int main(int argc, char *argv[])
         // check if bytes are 0xff 0xd8 0xff 0xe0-0xef
         else if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
+            //create string of ###.jpg for the first image
             if (imagecount == 0)
             {
-                //create string of ###.jpg, starting at 000.jpg
                 sprintf(filename, "%03i.jpg", imagecount);
-                imagecount++;
                 img = fopen(filename, "w");
-                fwrite(buffer, BLOCK_SIZE, 1, img);
+                fwrite(buffer, 512, 1, img);
+                imagecount++;
             }
             
-            // close previouse file
+            // close previouse file if another jpg has been found
             fclose(img);
-            // create new file
-            sprintf(filename, "%03i.jpg", imagecount);
             imagecount++;
+            sprintf(filename, "%03i.jpg", imagecount);
             img = fopen(filename, "w");
-            fwrite(buffer, BLOCK_SIZE, 1, img);
-
+            fwrite(buffer, 512, 1, img);
         }
+                    
+        // continue writing if the file is opening
+        else if (imagecount != 0)
+        {
+            fwrite(buffer, 512, 1, img);
+        }
+
     }
     fclose(img);
     fclose(file);
