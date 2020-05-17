@@ -25,6 +25,9 @@ const unsigned int N = 65536;
 // Hash table
 node *table[N];
 
+//set empty head
+node *head = NULL;
+
 int counter = 0;
 
 // Hashes word to a number
@@ -37,7 +40,7 @@ unsigned int hash(const char *word)
     for (int i = 0, n = strlen(word); i < n; i++)
     {
         // << 2 is equivalent to multiplying by 4 ( 22 ). But the shift operation is more efficient (and faster) than using x*4
-        hash = (hash << 2) ^ word[i];
+        hash = (hash << 2) ^ tolower(word[i]);
     }
     //returns a value in the range (0, N)
     return hash % N;
@@ -81,10 +84,10 @@ bool load(const char *dictionary)
     }
 
     // temp array for word
-    char word[LENGTH + 1];
+    char dword[LENGTH + 1];
 
     // scan word by word in dictionary
-    while (fscanf(dicf, "%s", word) != EOF)
+    while (fscanf(dicf, "%s", dword) != EOF)
     {
         // allocate memory
         node *n = malloc(sizeof(node));
@@ -97,13 +100,13 @@ bool load(const char *dictionary)
         }
 
         //copy the word into node
-        strcpy(n -> word, word);
+        strcpy(n -> word, dword);
 
         //frist n point to node
         n -> next = NULL;
 
         //hash word
-        unsigned int index = hash(word);
+        unsigned int index = hash(dword);
 
         //insert node into hash table at that location
         n -> next = table[index];
