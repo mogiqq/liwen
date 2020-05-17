@@ -67,7 +67,7 @@ unsigned int hash(const char *word)
     for (int i = 0, n = strlen(word); i < n; i++)
     {
         // << 2 is equivalent to multiplying by 4 ( 22 ). But the shift operation is more efficient (and faster) than using x*4
-        hash = (hash << 2) ^ word[i];
+        hash = (hash << 2) ^ tolower(word[i]);
     }
     //returns a value in the range (0, N)
     return hash % N;
