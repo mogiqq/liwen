@@ -30,22 +30,6 @@ node *head = NULL;
 
 int counter = 0;
 
-// Hashes word to a number
-//https://www.reddit.com/r/cs50/comments/1x6vc8/pset6_trie_vs_hashtable/cf9nlkn/
-unsigned int hash(const char *word)
-{
-    // TODO
-    unsigned int hash = 0;
-
-    for (int i = 0, n = strlen(word); i < n; i++)
-    {
-        // << 2 is equivalent to multiplying by 4 ( 22 ). But the shift operation is more efficient (and faster) than using x*4
-        hash = (hash << 2) ^ tolower(word[i]);
-    }
-    //returns a value in the range (0, N)
-    return hash % N;
-}
-
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
@@ -56,16 +40,37 @@ bool check(const char *word)
     //start with cursor set to first item in the linked list
     unsigned int hashvalue = hash(word);
     node *cursor = table[hashvalue];
-
+    
+    if (table[hashvalue] == NULL)
+    {
+        return false;
+    }
+    
     while (cursor != NULL)
     {
-        if (strcasecmp(cursor -> word, word))
+        if (strcasecmp(cursor -> word, word) == 0)
         {
             return true;
         }
         cursor = cursor -> next;
     }
     return false;
+}
+
+// Hashes word to a number
+//https://www.reddit.com/r/cs50/comments/1x6vc8/pset6_trie_vs_hashtable/cf9nlkn/
+unsigned int hash(const char *word)
+{
+    // TODO
+    unsigned int hash = 0;
+
+    for (int i = 0, n = strlen(word); i < n; i++)
+    {
+        // << 2 is equivalent to multiplying by 4 ( 22 ). But the shift operation is more efficient (and faster) than using x*4
+        hash = (hash << 2) ^ word[i];
+    }
+    //returns a value in the range (0, N)
+    return hash % N;
 }
 
 // Loads dictionary into memory, returning true if successful else false
