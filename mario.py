@@ -1,5 +1,6 @@
 while True:
-    n = int(input("Height (1 to 8): "))
+    print("Height: ", end="")
+    n = int(input())
     if 0 < n < 9:
         for j in range(n):
             if j < n:
@@ -7,6 +8,4 @@ while True:
             elif j == n-1:
                 print("#" * n)
         break
-    else:
-        int(input("Height (1 to 8): "))
     
