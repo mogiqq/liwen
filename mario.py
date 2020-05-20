@@ -1,11 +1,11 @@
 while True:
-    print("Height: ", end="")
-    n = int(input())
+    n = input("Height: ")
     
-    if 0 < n < 9:
-        break
+    if n.isnumeric() == True:
+        if 0 < int(n) < 9:
+            break
 
-
+n = int(n)
 for i in range(1, n+1):
     if i < n:
         print(" " * (n-i) + "#" * (i))
