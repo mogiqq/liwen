@@ -10,9 +10,9 @@ while True:
 change = float(change)
 for i in range(len(coins)):
     while change > coins[i] or change == coins[i]:
-            multipy = int(change / coins[i])
-            change = round(change % coins[i], 2)
-            count += multipy
+        multipy = int(change / coins[i])
+        change = round(change % coins[i], 2)
+        count += multipy
     if change == 0:
         break
 
